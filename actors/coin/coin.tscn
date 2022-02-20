@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://jj4vddhifghi"]
+
+[ext_resource type="Script" path="res://actors/coin/coin.gd" id="1_e1x23"]
+[ext_resource type="Texture2D" uid="uid://g0gaw33ls43h" path="res://actors/coin/coin.png" id="2_i7aoj"]
+[ext_resource type="AudioStream" uid="uid://ngcnndjl12b4" path="res://sound/coin.wav" id="3_32ybq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lspey"]
+radius = 20.0
+
+[sub_resource type="Animation" id="Animation_2e5eq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_dyfhh"]
+resource_name = "collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(0.176777, 1.27456, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xd2rh"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4)]
+}
+
+[node name="Coin" type="Area2D"]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( "1_e1x23" )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource( "2_i7aoj" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.741176, 1, 0.776471, 1)
+shape = SubResource( "CircleShape2D_lspey" )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+anims/RESET = SubResource( "Animation_2e5eq" )
+anims/collect = SubResource( "Animation_dyfhh" )
+anims/float = SubResource( "Animation_xd2rh" )
+
+[node name="Jingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( "3_32ybq" )
+bus = &"Sfx"
+
+[connection signal="area_entered" from="." to="." method="_on_coin_area_entered"]

@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm560h8k8iroc"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_tls2w"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_pgnin"]
+[ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_1rwwq"]
+[ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="4_qwjcf"]
+[ext_resource type="PackedScene" uid="uid://ctsb2b4yn7vui" path="res://environment/spikes.tscn" id="5_qk5pg"]
+[ext_resource type="PackedScene" uid="uid://jj4vddhifghi" path="res://actors/coin/coin.tscn" id="6_gj02n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43b4e"]
+size = Vector2(64, 128)
+
+[node name="Level" instance=ExtResource( "1_tls2w" )]
+default_music = "explore"
+default_variant = 1
+
+[node name="Player" parent="." index="1"]
+position = Vector2(0, -32)
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-128, 64)
+polygon = PackedVector2Array(960, 320, 960, 448, 1152, 448, 1152, 352)
+
+[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-256, 128)
+polygon = PackedVector2Array(512, -384, 512, 192, 384.677, 242.929, 192, 320, 192, 448, 640, 448, 640, 320, 576, 320, 576, 192, 896, 192, 896, 320, 704, 320, 704, 448, 960, 448, 960, 384, 1024, 320, 1024, 0, 896, -128, 704, -128, 640, -192, 576, -255.964, 576, -448)
+
+[node name="Brick3" parent="Walls" index="2" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-256, 128)
+polygon = PackedVector2Array(-64, -704, 64, -704, 63.6288, -128, 448, -128, 448, 112, 400, 128, 128, 128, 96, 160, 64, 190.818, 64, 257.317, 128, 320, 128, 448, 64, 512, 64, 544, 1216, 544, 1472, 416, 1472, 768, 2048.75, 768, 2048, -704, 2176, -704, 2176, 832, -64, 832)
+
+[node name="Brick4" parent="Walls" index="3" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-256, 128)
+polygon = PackedVector2Array(1536, 384, 1856, 384, 1856, 768, 1536, 768)
+
+[node name="Brick5" parent="Walls" index="4" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-512, 256)
+polygon = PackedVector2Array(1408, -64, 1728, -64, 1728, 128, 1600, 128, 1471.96, -0.0386505, 1408, 0)
+
+[node name="Brick6" parent="Walls" index="5" instance=ExtResource( "2_pgnin" )]
+position = Vector2(512, 0)
+polygon = PackedVector2Array(832, 192, 832, 304, 1024, 448, 1152, 448)
+
+[node name="Brick7" parent="Walls" index="6" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-1024, 512)
+polygon = PackedVector2Array(2368, -512, 2512, -592, 2688, -592, 2688, -448, 2368, -448)
+
+[node name="Brick8" parent="Walls" index="7" instance=ExtResource( "2_pgnin" )]
+position = Vector2(-304, 128)
+polygon = PackedVector2Array(704, -384, 704, -320, 832, -320, 832, -384)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(-256, -576, -256, 768, 896, 768, 1152, 928, 1856, 928, 1856, -576, 1920, -576, 1920, 960, -320, 960, -320, -576)
+
+[node name="Door" parent="." index="5"]
+flag = "climb"
+
+[node name="Lift" parent="." index="6" instance=ExtResource( "3_1rwwq" )]
+position = Vector2(1728, 448)
+
+[node name="Line2D" parent="Lift" index="1"]
+points = PackedVector2Array(0, 0, 0, 448)
+
+[node name="Lift2" parent="." index="7" instance=ExtResource( "3_1rwwq" )]
+position = Vector2(416, 448)
+
+[node name="Polygon2D" parent="Lift2" index="0"]
+position = Vector2(1.52588e-05, 4)
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-64, -8, 64, -8, 63.9999, 24, -64, 24)
+
+[node name="Line2D" parent="Lift2" index="1"]
+points = PackedVector2Array(0, 0, 0, 240)
+
+[node name="Lift3" parent="." index="8" instance=ExtResource( "3_1rwwq" )]
+position = Vector2(1280, 16)
+
+[node name="Line2D" parent="Lift3" index="1"]
+points = PackedVector2Array(0, 0, 0, 176)
+
+[node name="Tablet" parent="." index="9" instance=ExtResource( "4_qwjcf" )]
+position = Vector2(496, -288)
+flag = "climb"
+
+[node name="Spikes" parent="." index="10" instance=ExtResource( "5_qk5pg" )]
+position = Vector2(992, 304)
+rotation = -2.31373
+z_index = -1
+
+[node name="Polygon2D" parent="Spikes" index="0"]
+position = Vector2(-37.048, 3.25119)
+scale = Vector2(0.710562, 0.8984)
+
+[node name="Spikes2" parent="." index="11" instance=ExtResource( "5_qk5pg" )]
+position = Vector2(1344, 864)
+z_index = -1
+
+[node name="Polygon2D" parent="Spikes2" index="0"]
+position = Vector2(-37.048, 3.25119)
+scale = Vector2(0.710562, 0.8984)
+polygon = PackedVector2Array(-128, -39.2377, 682.626, -39.2377, 682.626, 32, -128, 32)
+
+[node name="Coin" parent="." index="12" instance=ExtResource( "6_gj02n" )]
+position = Vector2(608, 352)
+
+[node name="Coin2" parent="." index="13" instance=ExtResource( "6_gj02n" )]
+position = Vector2(1632, -112)
+
+[node name="Music" type="Area2D" parent="." index="14"]
+position = Vector2(704, 640)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Music" index="0"]
+position = Vector2(32, -32)
+shape = SubResource( "RectangleShape2D_43b4e" )
+
+[connection signal="area_entered" from="Music" to="." method="play_explore_2"]
+[connection signal="body_entered" from="Music" to="." method="play_explore_2"]
+
+[editable path="Lift"]
+[editable path="Lift2"]
+[editable path="Lift3"]
+[editable path="Spikes"]
+[editable path="Spikes2"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://co45vreyy5ukn"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_g0ih5"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_c0eov"]
+[ext_resource type="PackedScene" uid="uid://ctsb2b4yn7vui" path="res://environment/spikes.tscn" id="3_780r5"]
+[ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="4_twsfl"]
+[ext_resource type="PackedScene" uid="uid://jj4vddhifghi" path="res://actors/coin/coin.tscn" id="5_6fx4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouh3a"]
+size = Vector2(64, 128)
+
+[node name="Level" instance=ExtResource( "1_g0ih5" )]
+default_music = "explore"
+default_variant = 1
+
+[node name="Player" parent="." index="1"]
+position = Vector2(0, -32)
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_c0eov" )]
+position = Vector2(-32, 64)
+polygon = PackedVector2Array(-176, -64, -176, -1472, -96, -1472, -94.824, -64, 384, -64, 384, -256, 576, -256, 576, -512, 706.223, -512, 720, -384, 768, -384, 783.892, -512, 784, -912, 992, -912, 992, -1472, 1056, -1472, 1056, -912, 1056, 80, 768, 80, 384, 80, -176, 80)
+
+[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_c0eov" )]
+position = Vector2(-320, 320)
+polygon = PackedVector2Array(512, -1168, 992, -1168, 992, -848, 784, -848, 784, -592, 592, -592, 592, -384, 512, -384)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(-192, -1408, -192, 96, 1008, 96, 1008, -1408, 1104, -1408, 1104, 176, -304, 176, -304, -1408)
+
+[node name="Spikes" parent="." index="6" instance=ExtResource( "3_780r5" )]
+position = Vector2(736, -352)
+z_index = -1
+
+[node name="Tablet" parent="." index="7" instance=ExtResource( "4_twsfl" )]
+position = Vector2(224, -880)
+flag = "walljump"
+
+[node name="Coin" parent="." index="8" instance=ExtResource( "5_6fx4s" )]
+position = Vector2(896, -1056)
+
+[node name="Music" type="Area2D" parent="." index="9"]
+position = Vector2(672, -464)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Music" index="0"]
+position = Vector2(32, -32)
+shape = SubResource( "RectangleShape2D_ouh3a" )
+
+[connection signal="area_entered" from="Music" to="." method="play_explore_2"]

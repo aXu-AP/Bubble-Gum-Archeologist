@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmmfoj016di3a"]
+
+[ext_resource type="Texture2D" uid="uid://dfvxayan3fhtq" path="res://environment/brick.png" id="1_kgr1b"]
+[ext_resource type="Script" path="res://global/collider_from_polygon.gd" id="1_v0ele"]
+
+[node name="Brick" type="Polygon2D"]
+texture_repeat = 2
+texture = ExtResource( "1_kgr1b" )
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+script = ExtResource( "1_v0ele" )

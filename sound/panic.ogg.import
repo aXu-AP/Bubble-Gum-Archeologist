@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://dw1pegtnmcil5"
+path="res://.godot/imported/panic.ogg-1799742838e9b8d87a1ed9a20cbcfb1f.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/panic.ogg"
+dest_files=["res://.godot/imported/panic.ogg-1799742838e9b8d87a1ed9a20cbcfb1f.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=4.024

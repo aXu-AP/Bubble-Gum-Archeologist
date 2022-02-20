@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfuj3xsosh3n7"]
+
+[ext_resource type="Script" path="res://global/camera.gd" id="1_ywj1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cogu0"]
+size = Vector2(1980, 1080)
+
+[node name="Camera" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource( "1_ywj1u" )
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["current_camera"]]
+current = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( "RectangleShape2D_cogu0" )

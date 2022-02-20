@@ -1,0 +1,169 @@
+[gd_scene load_steps=14 format=3 uid="uid://dr2n1fl4dikrl"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_4owey"]
+[ext_resource type="Script" path="res://levels/level_spike_ceiling.gd" id="2_ccyxw"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_ps5v8"]
+[ext_resource type="PackedScene" uid="uid://dped4kp05xrce" path="res://environment/camera_zone_lock.tscn" id="3_6k1wr"]
+[ext_resource type="Script" path="res://global/camera_parameters.gd" id="4_dqisu"]
+[ext_resource type="Texture2D" uid="uid://bxdmyup82vjxa" path="res://environment/spikes.png" id="5_s3k5x"]
+[ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="6_2ajoy"]
+[ext_resource type="AudioStream" uid="uid://03ilpvwst4" path="res://sound/lift.wav" id="7_wi6f6"]
+
+[sub_resource type="Resource" id="Resource_7p43r"]
+script = ExtResource( "4_dqisu" )
+mode = 1
+target_path = NodePath(".")
+offset = Vector2(0, 0)
+zoom = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lw7u"]
+size = Vector2(1024, 1024)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igbfc"]
+size = Vector2(1216, 64)
+
+[sub_resource type="Animation" id="Animation_amcoy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeCeiling:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -864)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpikeCeiling/AudioStreamPlayer2D:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_guwvl"]
+resource_name = "spikes_fall"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeCeiling:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.4, 1.5, 3, 9, 9.5, 17),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1.5, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -864), Vector2(-7, -865), Vector2(1, -873), Vector2(-4, -873), Vector2(-2.2, -866.95), Vector2(0, -864), Vector2(0, -832), Vector2(0, -552), Vector2(0, -552), Vector2(0, 160)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpikeCeiling/AudioStreamPlayer2D:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5, 3, 9, 9.1, 9.5, 9.6),
+"transitions": PackedFloat32Array(1, 0.0579264, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-30.0, -30.0, 0.0, 0.0, -60.0, -60.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpikeCeiling/AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[node name="Level" instance=ExtResource( "1_4owey" )]
+script = ExtResource( "2_ccyxw" )
+default_music = "explore"
+default_variant = 1
+
+[node name="Player" parent="." index="1"]
+position = Vector2(-224, 224)
+
+[node name="Camera" parent="." index="2"]
+position = Vector2(-224, 192)
+
+[node name="Brick2" parent="Walls" index="0" instance=ExtResource( "2_ps5v8" )]
+polygon = PackedVector2Array(-320, 256, 192, 256, 320, 160, 320, 32, 192, -64, -128, -96, -192, -96, -128, -128, 192, -160, 320, -224, 320, -352, 192, -448, -128, -480, -192, -480, -128, -512, 192, -544, 320, -608, 448, -608, 448, -1024, 768, -1024, 768, 512, -640, 512, -640, -1024, 128, -1024, 128, -672, -192, -640, -320, -544, -320, -416, -192, -352, 128, -320, 192, -288, 128, -288, -192, -256, -320, -160, -320, -32, -192, 32, 128, 64, 192, 96, 128, 128, -320, 128)
+closed_line = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(640, -1024, 640, 384, -576, 384, -576, -896, 640, -896, 640, -1024, -768, -1024, -768, 640, 768, 640, 768, -1024)
+
+[node name="CameraZone1" parent="." index="5" instance=ExtResource( "3_6k1wr" )]
+visible = false
+position = Vector2(0, -224)
+parameters = SubResource( "Resource_7p43r" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraZone1" index="0"]
+shape = SubResource( "RectangleShape2D_8lw7u" )
+
+[node name="SpikeCeiling" type="AnimatableBody2D" parent="." index="6"]
+position = Vector2(0, -864)
+
+[node name="Brick" parent="SpikeCeiling" index="0" instance=ExtResource( "2_ps5v8" )]
+color = Color(0.862745, 0.705882, 0.701961, 1)
+polygon = PackedVector2Array(-576, -32, 640, -32, 640, 32, -576, 32)
+
+[node name="Spikes" type="Area2D" parent="SpikeCeiling" index="1"]
+position = Vector2(0, 64)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeCeiling/Spikes" index="0"]
+position = Vector2(32, 0)
+shape = SubResource( "RectangleShape2D_igbfc" )
+
+[node name="Polygon2D" type="Polygon2D" parent="SpikeCeiling/Spikes" index="1"]
+texture_repeat = 2
+rotation = 3.14159
+texture = ExtResource( "5_s3k5x" )
+texture_offset = Vector2(0, -32)
+polygon = PackedVector2Array(-640, -31.9999, 576, -32.0001, 576, 32, -640, 32.0001)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SpikeCeiling" index="2"]
+stream = ExtResource( "7_wi6f6" )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/RESET = SubResource( "Animation_amcoy" )
+anims/spikes_fall = SubResource( "Animation_guwvl" )
+
+[node name="Door" parent="." index="8"]
+position = Vector2(-224, 256)
+flag = "spike_ceiling"
+
+[node name="Tablet" parent="." index="9" instance=ExtResource( "6_2ajoy" )]
+position = Vector2(384, -640)
+flag = "spike_ceiling"
+
+[connection signal="area_entered" from="Tablet" to="." method="launch_trap" flags=6]

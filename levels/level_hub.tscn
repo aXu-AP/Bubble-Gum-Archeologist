@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://pvf8gyn3l6h2"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_48qke"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_gywg8"]
+[ext_resource type="Script" path="res://levels/level_hub.gd" id="2_xr755"]
+[ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_c08n3"]
+[ext_resource type="PackedScene" uid="uid://c1redqcn1rwuo" path="res://environment/door.tscn" id="4_jokrg"]
+
+[node name="Level" instance=ExtResource( "1_48qke" )]
+script = ExtResource( "2_xr755" )
+default_music = "explore"
+
+[node name="Player" parent="." index="1"]
+position = Vector2(-728, -32)
+
+[node name="Camera" parent="." index="2"]
+position = Vector2(-728, -64)
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_gywg8" )]
+polygon = PackedVector2Array(-1280, -880, -1088, -520, -1089.49, 0, -512, 0, -512, 256, -192, 256, -192, 0, 128, 0, 128, -552, 320, -896, 320, 448, -1280, 448)
+
+[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_gywg8" )]
+polygon = PackedVector2Array(-2.79753e-06, -64, 64, -64, 64, -256, -576, -256, -576, -192, -8.39259e-06, -192)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(-1152, -640, -1152, 320, 192, 320, 192, -736, 328, -752, 344, 496, -1312, 472, -1288, -680)
+
+[node name="Door" parent="." index="5"]
+position = Vector2(-608, 0)
+level = "res://levels/level_gap.tscn"
+flag = "gap"
+
+[node name="Lift" parent="." index="6" instance=ExtResource( "3_c08n3" )]
+position = Vector2(-480, 8)
+
+[node name="Polygon2D" parent="Lift" index="0"]
+polygon = PackedVector2Array(-32, 8, -32, -8, 32, -8, 32, 8)
+
+[node name="Line2D" parent="Lift" index="1"]
+points = PackedVector2Array(0, 0, 0, 264)
+
+[node name="Door5" parent="." index="7" instance=ExtResource( "4_jokrg" )]
+position = Vector2(-184, -256)
+level = "res://levels/level_jump.tscn"
+flag = "jump"
+
+[node name="Door4" parent="." index="8" instance=ExtResource( "4_jokrg" )]
+position = Vector2(-464, -256)
+level = "res://levels/level_climb.tscn"
+flag = "climb"
+
+[node name="Door2" parent="." index="9" instance=ExtResource( "4_jokrg" )]
+position = Vector2(-320, 256)
+level = "res://levels/level_spike_ceiling.tscn"
+flag = "spike_ceiling"
+
+[node name="Door3" parent="." index="10" instance=ExtResource( "4_jokrg" )]
+position = Vector2(-96, 0)
+level = "res://levels/level_walljump.tscn"
+flag = "walljump"
+
+[node name="DoorFinish" parent="." index="11" instance=ExtResource( "4_jokrg" )]
+position = Vector2(-896, 0)
+scale = Vector2(2, 2)
+level = "res://levels/level_finish.tscn"
+flag = "not_finished"
+
+[editable path="Lift"]

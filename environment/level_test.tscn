@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://kl4nou7j0cin"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_xv0ik"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_3iav1"]
+[ext_resource type="PackedScene" uid="uid://ctsb2b4yn7vui" path="res://environment/spikes.tscn" id="3_t42el"]
+
+[node name="Level" instance=ExtResource( "1_xv0ik" )]
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_3iav1" )]
+position = Vector2(-192, -64)
+polygon = PackedVector2Array(-208, 96, 32, 192, 400, 192, 528, 32, 704, 32, 656, 224, 320, 288, -64, 256)
+
+[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_3iav1" )]
+position = Vector2(-48, -112)
+polygon = PackedVector2Array(480, -96, 592, -176, 768, -96, 624, -16)
+
+[node name="Brick3" parent="Walls" index="2" instance=ExtResource( "2_3iav1" )]
+position = Vector2(-400, -176)
+polygon = PackedVector2Array(480, -96, 592, -176, 800, -160, 768, -96, 784, 32, 704, 48, 624, -16, 592, 80, 496, 32)
+
+[node name="Spikes" parent="." index="6" instance=ExtResource( "3_t42el" )]
+position = Vector2(-256, 32)

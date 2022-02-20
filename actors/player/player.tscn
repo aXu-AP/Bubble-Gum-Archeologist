@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://du0a6kn7ejgy7"]
+
+[ext_resource type="Script" path="res://actors/player/player.gd" id="1_txpe6"]
+[ext_resource type="PackedScene" uid="uid://dq0i6jmkv0gda" path="res://actors/player/player_sprite.tscn" id="2_dq6bo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eunum"]
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6c531"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2rjh"]
+radius = 6.0
+height = 40.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+floor_snap_length = 3.0
+script = ExtResource( "1_txpe6" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( "CapsuleShape2D_eunum" )
+
+[node name="PlayerSprite" parent="." instance=ExtResource( "2_dq6bo" )]
+position = Vector2(0, 15)
+scale = Vector2(0.12, 0.12)
+
+[node name="CollectibleArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleArea"]
+modulate = Color(0.741176, 1, 0.776471, 1)
+shape = SubResource( "CapsuleShape2D_6c531" )
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+modulate = Color(1, 0, 0.231373, 1)
+shape = SubResource( "CapsuleShape2D_f2rjh" )
+
+[node name="DoorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
+modulate = Color(1, 0, 0.231373, 1)
+shape = SubResource( "CapsuleShape2D_f2rjh" )

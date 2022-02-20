@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctsb2b4yn7vui"]
+
+[ext_resource type="Texture2D" uid="uid://bxdmyup82vjxa" path="res://environment/spikes.png" id="1_k1b12"]
+[ext_resource type="Script" path="res://global/collider_from_polygon.gd" id="2_ty4pw"]
+
+[node name="Spikes" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource( "1_k1b12" )
+texture_offset = Vector2(0, -32)
+polygon = PackedVector2Array(-128, -32, 128, -32, 128, 32, -128, 32)
+script = ExtResource( "2_ty4pw" )
+make_line = false

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://jv0b3ow43y31"]
+
+[ext_resource type="Texture2D" uid="uid://dfvxayan3fhtq" path="res://environment/brick.png" id="1_0w3hc"]
+[ext_resource type="Script" path="res://levels/level_template.gd" id="1_dridn"]
+[ext_resource type="PackedScene" uid="uid://du0a6kn7ejgy7" path="res://actors/player/player.tscn" id="2_4r8gt"]
+[ext_resource type="Script" path="res://global/camera_parameters.gd" id="4_j61he"]
+[ext_resource type="PackedScene" uid="uid://dfuj3xsosh3n7" path="res://global/camera.tscn" id="5_bwnnr"]
+[ext_resource type="PackedScene" uid="uid://c1redqcn1rwuo" path="res://environment/door.tscn" id="5_sqfll"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_154jf"]
+radius = 5.0
+
+[sub_resource type="Resource" id="Resource_mo74g"]
+script = ExtResource( "4_j61he" )
+mode = 1
+target_path = NodePath("../Player")
+offset = Vector2(0, -32)
+zoom = 0.4
+
+[node name="Level" type="Node2D"]
+script = ExtResource( "1_dridn" )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2(0.9, 0.9)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+color = Color(0.368627, 0.34902, 0.290196, 1)
+texture = ExtResource( "1_0w3hc" )
+texture_scale = Vector2(0.8, 0.8)
+polygon = PackedVector2Array(-4096, -4096, 4096, -4096, 4096, 4096, -4096, 4096)
+
+[node name="Player" parent="." instance=ExtResource( "2_4r8gt" )]
+z_index = 100
+
+[node name="AreaCamera" type="Area2D" parent="Player"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AreaCamera"]
+shape = SubResource( "CircleShape2D_154jf" )
+
+[node name="Camera" parent="." instance=ExtResource( "5_bwnnr" )]
+position = Vector2(9.09495e-13, -32)
+scale = Vector2(0.2, 0.2)
+default_parameters = SubResource( "Resource_mo74g" )
+target_area_path = NodePath("../Player/AreaCamera")
+player_path = NodePath("../Player")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="CameraCollision" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Door" parent="." instance=ExtResource( "5_sqfll" )]
+level = "res://levels/level_hub.tscn"

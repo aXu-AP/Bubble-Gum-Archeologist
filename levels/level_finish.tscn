@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://dt2qkpii7ms8w"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_wa1ig"]
+[ext_resource type="Script" path="res://global/camera_parameters.gd" id="2_10rtp"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="3_7qtg6"]
+[ext_resource type="Script" path="res://ui/finish_screen.gd" id="4_xmvyh"]
+[ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="4_xnfi5"]
+
+[sub_resource type="Resource" id="Resource_b7dxu"]
+script = ExtResource( "2_10rtp" )
+mode = 0
+target_path = NodePath("../Walls/Brick")
+offset = Vector2(0, -32)
+zoom = 0.3
+
+[node name="Level" instance=ExtResource( "1_wa1ig" )]
+default_music = "victory"
+
+[node name="Player" parent="." index="1"]
+position = Vector2(96, 192)
+
+[node name="Camera" parent="." index="2"]
+position = Vector2(208, 144)
+scale = Vector2(0.3, 0.3)
+default_parameters = SubResource( "Resource_b7dxu" )
+
+[node name="Walls" parent="." index="3"]
+position = Vector2(64, 224)
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "3_7qtg6" )]
+position = Vector2(144, -80)
+polygon = PackedVector2Array(-240, -272, -240, 80, 240, 80, 240, -272, 368, -544, 368, 240, -400, 240, -400, -544)
+
+[node name="CameraCollision" parent="." index="4"]
+position = Vector2(64, 224)
+
+[node name="Door" parent="." index="5"]
+position = Vector2(96, 224)
+scale = Vector2(2, 2)
+open = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
+script = ExtResource( "4_xmvyh" )
+
+[node name="Control" type="VBoxContainer" parent="CanvasLayer" index="0"]
+anchor_left = 0.55
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 0.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" index="0"]
+offset_right = 693.0
+offset_bottom = 150.0
+theme = ExtResource( "4_xnfi5" )
+theme_override_font_sizes/font_size = 100
+text = "Congratulations!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelCoins" type="Label" parent="CanvasLayer/Control" index="1"]
+offset_top = 154.0
+offset_right = 693.0
+offset_bottom = 252.0
+theme = ExtResource( "4_xnfi5" )
+theme_override_font_sizes/font_size = 64
+text = "Collected coins:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelTime" type="Label" parent="CanvasLayer/Control" index="2"]
+offset_top = 256.0
+offset_right = 693.0
+offset_bottom = 354.0
+theme = ExtResource( "4_xnfi5" )
+theme_override_font_sizes/font_size = 64
+text = "Time:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelScore" type="Label" parent="CanvasLayer/Control" index="3"]
+offset_top = 358.0
+offset_right = 693.0
+offset_bottom = 456.0
+theme = ExtResource( "4_xnfi5" )
+theme_override_font_sizes/font_size = 64
+text = "Total Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}

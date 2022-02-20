@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://s3q430cxf7nw"]
+
+[ext_resource type="Script" path="res://global/follow_line.gd" id="1_es8id"]
+[ext_resource type="Texture2D" uid="uid://dfvxayan3fhtq" path="res://environment/brick.png" id="2_hi53l"]
+[ext_resource type="AudioStream" uid="uid://03ilpvwst4" path="res://sound/lift.wav" id="2_xdhfr"]
+[ext_resource type="Script" path="res://global/collider_from_polygon.gd" id="3_2q10f"]
+
+[node name="Lift" type="AnimatableBody2D"]
+script = ExtResource( "1_es8id" )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+color = Color(0.713726, 0.427451, 0.290196, 1)
+texture = ExtResource( "2_hi53l" )
+texture_scale = Vector2(3, 1)
+polygon = PackedVector2Array(-64, -8, 64, -8, 64, 8, -64, 8)
+script = ExtResource( "3_2q10f" )
+one_way = true
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 384)
+width = 2.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( "2_xdhfr" )
+autoplay = true
+max_distance = 500.0
+bus = &"Sfx"

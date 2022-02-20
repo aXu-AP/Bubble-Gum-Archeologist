@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnadsr8v1mduo"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_o717v"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_bn7wd"]
+[ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_qev83"]
+[ext_resource type="PackedScene" uid="uid://ctsb2b4yn7vui" path="res://environment/spikes.tscn" id="4_u2v8u"]
+[ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="5_lvbjv"]
+[ext_resource type="PackedScene" uid="uid://jj4vddhifghi" path="res://actors/coin/coin.tscn" id="6_wxvmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmvfv"]
+size = Vector2(64, 128)
+
+[node name="Level" instance=ExtResource( "1_o717v" )]
+default_music = "explore"
+default_variant = 1
+
+[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_bn7wd" )]
+position = Vector2(0, 96)
+polygon = PackedVector2Array(-128, -64, 320, -64, 320, 0, 320, 64, 0, 64, 0, 368, 320, 368, 320, 480, -128, 480)
+
+[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_bn7wd" )]
+position = Vector2(600, 112)
+polygon = PackedVector2Array(-152, -80, 0, -80, 0, 16, 40, 16, 40, 80, 136, 80, 136, -80, 264, -80, 264, 80, 416, 80, 416, -72, 520, -120, 520, -176, 616, -176, 744, -304, 808, -304, 808, 464, 258.999, 464, 12, 464, -152, 464)
+
+[node name="Brick3" parent="Walls" index="2" instance=ExtResource( "2_bn7wd" )]
+position = Vector2(384, -496)
+polygon = PackedVector2Array(832, 112, -96, 112, -128, 64, -128, -144, 24, -144, 24, 0, 832, 0)
+
+[node name="Brick4" parent="Walls" index="3" instance=ExtResource( "2_bn7wd" )]
+position = Vector2(1464, -624)
+polygon = PackedVector2Array(-136, 128, 104, 128, 136, 144, 136, 288, 104, 288, 104, 216, 56, 192, -112, 176, -136, 176)
+
+[node name="Brick7" parent="Walls" index="4" instance=ExtResource( "2_bn7wd" )]
+position = Vector2(1680, -464)
+polygon = PackedVector2Array(-48, -16, -16, -32, 32, -32, 32, -312, -24, -424, -24, -600, 112, -624, 176, -624, 176, 1104, -2000, 1104, -2000, -248, -1736, -248, -1736, -168, -1872, -112, -1872, 1040, -144, 1040, -144, 992, 32, 992, 32, 912, -144, 912, -144, 240, -112, 224, -104, 208, -48, 208)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(-256, -712, -256, 608, 1792, 608, 1792, -1088, 1856, -1088, 1856, 640, -320, 640, -320, -712)
+
+[node name="Door" parent="." index="5"]
+position = Vector2(0, 32)
+flag = "jump"
+
+[node name="Lift" parent="." index="6" instance=ExtResource( "3_qev83" )]
+position = Vector2(1472, -184)
+
+[node name="Line2D" parent="Lift" index="1"]
+points = PackedVector2Array(0, 0, 0, 760)
+
+[node name="Spikes" parent="." index="7" instance=ExtResource( "4_u2v8u" )]
+position = Vector2(408, 544)
+
+[node name="Polygon2D" parent="Spikes" index="0"]
+position = Vector2(-24, 8)
+z_index = -1
+polygon = PackedVector2Array(-64, -32, 64, -32, 64, 24, -64, 24)
+
+[node name="Spikes2" parent="." index="8" instance=ExtResource( "4_u2v8u" )]
+position = Vector2(944, 160)
+
+[node name="Polygon2D" parent="Spikes2" index="0"]
+position = Vector2(-24, 8)
+z_index = -1
+polygon = PackedVector2Array(-56, -32, 96, -32, 96, 24, -56, 24)
+uv = PackedVector2Array(-64, -32, 96, -32, 96, 24, -64, 24)
+
+[node name="Spikes3" parent="." index="9" instance=ExtResource( "4_u2v8u" )]
+position = Vector2(336, -672)
+
+[node name="Polygon2D" parent="Spikes3" index="0"]
+position = Vector2(-24, 8)
+z_index = -1
+polygon = PackedVector2Array(-56, -32, 96, -32, 96, 24, -56, 24)
+uv = PackedVector2Array(-64, -32, 96, -32, 96, 24, -64, 24)
+
+[node name="Tablet" parent="." index="10" instance=ExtResource( "5_lvbjv" )]
+position = Vector2(432, -520)
+flag = "jump"
+
+[node name="Lift2" parent="." index="11" instance=ExtResource( "3_qev83" )]
+position = Vector2(384, 120)
+
+[node name="Coin" parent="." index="12" instance=ExtResource( "6_wxvmj" )]
+position = Vector2(32, 424)
+
+[node name="Coin2" parent="." index="13" instance=ExtResource( "6_wxvmj" )]
+position = Vector2(1672, 488)
+
+[node name="Music" type="Area2D" parent="." index="14"]
+position = Vector2(864, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Music" index="0"]
+position = Vector2(32, -32)
+shape = SubResource( "RectangleShape2D_cmvfv" )
+
+[connection signal="area_entered" from="Music" to="." method="play_explore_2"]
+
+[editable path="Lift"]
+[editable path="Spikes"]
+[editable path="Spikes2"]
+[editable path="Spikes3"]

@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://wnm6k3fbq1du"]
+
+[ext_resource type="Script" path="res://actors/tablet/tablet.gd" id="1_3uc8l"]
+[ext_resource type="Texture2D" uid="uid://osaasdsm2wli" path="res://actors/tablet/tablet.png" id="1_cfw3s"]
+[ext_resource type="AudioStream" uid="uid://b2w0ie86tq1eo" path="res://sound/gold.wav" id="3_wmiq5"]
+[ext_resource type="AudioStream" uid="uid://dk0iro4pkc8oo" path="res://sound/glittering_gold.wav" id="4_1ow6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0omls"]
+radius = 20.0
+
+[sub_resource type="Animation" id="Animation_siep0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_omobs"]
+resource_name = "collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(0.176777, 1.27456, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6hygf"]
+resource_name = "float"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.31, 0.31)]
+}
+
+[node name="Tablet" type="Area2D"]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( "1_3uc8l" )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource( "1_cfw3s" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.741176, 1, 0.776471, 1)
+shape = SubResource( "CircleShape2D_0omls" )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+anims/RESET = SubResource( "Animation_siep0" )
+anims/collect = SubResource( "Animation_omobs" )
+anims/float = SubResource( "Animation_6hygf" )
+
+[node name="Jingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( "3_wmiq5" )
+bus = &"Sfx"
+
+[node name="Glitter" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( "4_1ow6c" )
+volume_db = -10.0
+autoplay = true
+max_distance = 500.0
+bus = &"Sfx"
+
+[connection signal="area_entered" from="." to="." method="_on_tablet_area_entered"]
