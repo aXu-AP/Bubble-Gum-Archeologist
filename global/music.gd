@@ -1,10 +1,10 @@
 extends Node
 
-var stream_packs := {
-	menu = [preload("res://sound/menu.ogg")],
-	explore = [preload("res://sound/explore1.ogg"), preload("res://sound/explore2.ogg"), preload("res://sound/explore3.ogg")],
-	panic = [preload("res://sound/panic2.ogg")],
-	victory = [preload("res://sound/victory.ogg")]
+@onready var stream_packs := {
+	menu = [load("res://sound/menu.ogg")],
+	explore = [load("res://sound/explore1.ogg"), load("res://sound/explore2.ogg"), load("res://sound/explore3.ogg")],
+	panic = [load("res://sound/panic2.ogg")],
+	victory = [load("res://sound/victory.ogg")]
 }
 
 var current_music := ""

@@ -38,7 +38,7 @@ func get_sfx(name : String) -> AudioStream:
 			
 			if file_name == "":
 				break
-			elif file_name.match(name + "*.wav"):
-				bank.append(ResourceLoader.load(path + file_name, "AudioStreamSample"))
+			elif file_name.match(name + "*.wav.import"):
+				bank.append(ResourceLoader.load(path + file_name.left(-7), "AudioStreamSample"))
 		dir.list_dir_end()
 	return bank[randi() % bank.size()]
