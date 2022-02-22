@@ -40,7 +40,9 @@ _global_script_class_icons={
 
 config/name="Bubble Gum Archeologist"
 run/main_scene="res://ui/main_menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://ui/icon/icon256.png"
+config/macos_native_icon="res://ui/icon/icon256.icns"
+config/windows_native_icon="res://ui/icon/icon.ico"
 config/features=PackedStringArray("4.0", "Vulkan Mobile")
 
 [autoload]

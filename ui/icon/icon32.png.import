@@ -2,16 +2,16 @@
 
 importer="texture"
 type="StreamTexture2D"
-uid="uid://bf2iowi2c0f68"
-path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+uid="uid://budc8c7hrbwcl"
+path="res://.godot/imported/icon32.png-76d1f5b5529a2a125d48d934e8e0b5f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"]
+source_file="res://ui/icon/icon32.png"
+dest_files=["res://.godot/imported/icon32.png-76d1f5b5529a2a125d48d934e8e0b5f7.stex"]
 
 [params]
 
@@ -29,6 +29,6 @@ roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
-process/HDR_as_SRGB=false
+process/hdr_as_srgb=false
 process/size_limit=0
 detect_3d/compress_to=1
