@@ -1,17 +1,12 @@
 extends CanvasLayer
 
-@onready var button_continue = find_node("ButtonContinue")
-@onready var button_reset = find_node("ButtonReset")
-@onready var button_main_menu = find_node("ButtonMainMenu")
-@onready var button_quit = find_node("ButtonQuit")
-@onready var label_coins = find_node("LabelCoins")
-@onready var label_time = find_node("LabelTime")
+@export_node_path(Label) var label_coins
+@export_node_path(Label) var label_time
 
 
 func _ready() -> void:
-	button_continue.grab_focus()
-	label_coins.text = "Coins: %d" % Globals.coins
-	label_time.text = "Time: %.2f" % Globals.elapsed_time
+	get_node(label_coins).text = "Coins: %d" % Globals.coins
+	get_node(label_time).text = "Time: %.2f" % Globals.elapsed_time
 
 
 func _process(delta: float) -> void:

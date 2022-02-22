@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dug2vk07q0fjm"]
+[gd_scene load_steps=9 format=3 uid="uid://dug2vk07q0fjm"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_hb7rr"]
 [ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="2_obr4f"]
+[ext_resource type="Script" path="res://ui/grab_focus_on_ready.gd" id="3_e2dsu"]
 [ext_resource type="PackedScene" uid="uid://dq0i6jmkv0gda" path="res://actors/player/player_sprite.tscn" id="3_eflpf"]
 [ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="4_dl2qf"]
 [ext_resource type="Texture2D" uid="uid://dfvxayan3fhtq" path="res://environment/brick.png" id="5_nit0q"]
@@ -128,6 +129,7 @@ offset_top = 397.0
 offset_right = 649.0
 offset_bottom = 494.0
 text = "Play!"
+script = ExtResource( "3_e2dsu" )
 
 [node name="ButtonReset" type="Button" parent="Pause/Control/PanelContainer/MarginContainer/VBoxContainer"]
 offset_top = 509.0

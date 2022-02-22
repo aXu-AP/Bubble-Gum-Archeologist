@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bev7sd4nni2if"]
+[gd_scene load_steps=4 format=3 uid="uid://bev7sd4nni2if"]
 
 [ext_resource type="Script" path="res://ui/pause.gd" id="1_vh85b"]
 [ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="2_ajf1c"]
+[ext_resource type="Script" path="res://ui/grab_focus_on_ready.gd" id="3_b6d78"]
 
 [node name="Pause" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource( "1_vh85b" )
+label_coins = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/LabelCoins")
+label_time = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/LabelTime")
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -47,6 +50,7 @@ theme_override_constants/separation = 15
 offset_right = 336.0
 offset_bottom = 97.0
 text = "Continue"
+script = ExtResource( "3_b6d78" )
 
 [node name="ButtonReset" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
 offset_top = 112.0

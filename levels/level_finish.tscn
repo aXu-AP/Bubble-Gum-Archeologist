@@ -41,15 +41,15 @@ open = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
 script = ExtResource( "4_xmvyh" )
+label_coins = NodePath("Control/LabelCoins")
+label_time = NodePath("Control/LabelTime")
+label_score = NodePath("Control/LabelScore")
 
 [node name="Control" type="VBoxContainer" parent="CanvasLayer" index="0"]
 anchor_left = 0.55
 anchor_top = 0.2
 anchor_right = 0.9
 anchor_bottom = 0.8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="CanvasLayer/Control" index="0"]
 offset_right = 693.0
