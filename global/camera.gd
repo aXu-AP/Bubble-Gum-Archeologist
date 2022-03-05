@@ -10,6 +10,7 @@ var player : Player
 var last_player_y = 1000000000
 var player_motion_smoothed := Vector2.ZERO
 
+
 func _ready() -> void:
 	default_parameters.target = get_node(default_parameters.target_path)
 	player = get_node(player_path)
@@ -48,6 +49,11 @@ func _process(_delta: float) -> void:
 		target_pos += player_motion_smoothed
 		motion_velocity = target_pos - global_position
 		
+		if is_snapping_on_next_frame:
+			global_position = target_pos
+			motion_velocity = Vector2.ZERO
+			is_snapping_on_next_frame = false
+		
 	motion_velocity *= 6
 	
 	move_and_slide()
@@ -59,3 +65,8 @@ func _process(_delta: float) -> void:
 		motion_velocity = target_move * 10
 		move_and_slide()
 		motion_velocity = keep_motion
+
+
+var is_snapping_on_next_frame := false
+func snap_next_frame():
+	is_snapping_on_next_frame = true

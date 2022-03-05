@@ -2,6 +2,7 @@ extends Node
 
 var current_level
 var current_level_packed
+var current_level_start_position
 var flags := {}
 @onready var checkpoint_flags = flags
 var elapsed_time := 0.0
@@ -16,8 +17,9 @@ func _ready() -> void:
 	load_game()
 
 
-func load_and_change_level(level : String, parameter = null):
+func load_and_change_level(level : String, start_position = ""):
 	current_level_packed = load(level)
+	current_level_start_position = start_position
 	save_game()
 	change_level()
 
@@ -29,6 +31,8 @@ func change_level() -> void:
 		parent = current_level.get_parent()
 		current_level.queue_free()
 	var new_level = current_level_packed.instantiate()
+	if "start_position" in new_level:
+		new_level.start_position = current_level_start_position
 	parent.add_child(new_level)
 	checkpoint_flags = flags.duplicate()
 	checkpoint_coins = coins

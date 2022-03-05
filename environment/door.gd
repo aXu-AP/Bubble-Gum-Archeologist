@@ -2,6 +2,7 @@ extends Area2D
 
 @export var open := true
 @export_file("*.tscn") var level
+@export var start_position := ""
 @export var flag := ""
 @export var closed_if_flag := true
 

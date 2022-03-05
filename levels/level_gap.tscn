@@ -46,6 +46,7 @@ polygon = PackedVector2Array(-1600, -1216, -1600, 384, -704.25, 384, -576, 320, 
 
 [node name="Door" parent="." index="5"]
 position = Vector2(224, 832)
+start_position = "DoorGap"
 flag = "gap"
 
 [node name="Lift" parent="." index="6" instance=ExtResource( "3_ppwsj" )]

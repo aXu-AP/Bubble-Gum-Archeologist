@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 			var areas = $DoorArea.get_overlapping_areas()
 			for door in areas:
 				if door.open:
-					Globals.load_and_change_level(door.level)
+					Globals.load_and_change_level(door.level, door.start_position)
 					break
 		
 		if Input.is_action_just_pressed("jump"):

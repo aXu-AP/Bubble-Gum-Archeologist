@@ -56,6 +56,7 @@ polygon = PackedVector2Array(704, -384, 704, -320, 832, -320, 832, -384)
 polygon = PackedVector2Array(-256, -576, -256, 768, 576, 768, 896, 928, 1856, 928, 1856, -576, 1920, -576, 1920, 960, -320, 960, -320, -576)
 
 [node name="Door" parent="." index="5"]
+start_position = "DoorClimb"
 flag = "climb"
 
 [node name="Lift" parent="." index="6" instance=ExtResource( "3_1rwwq" )]

@@ -161,6 +161,7 @@ anims/spikes_fall = SubResource( "Animation_guwvl" )
 
 [node name="Door" parent="." index="8"]
 position = Vector2(-224, 256)
+start_position = "DoorSpikeCeiling"
 flag = "spike_ceiling"
 
 [node name="Tablet" parent="." index="9" instance=ExtResource( "6_2ajoy" )]

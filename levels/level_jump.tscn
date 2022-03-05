@@ -58,6 +58,7 @@ polygon = PackedVector2Array(-256, -712, -256, 608, 1792, 608, 1792, -1088, 1856
 
 [node name="Door" parent="." index="5"]
 position = Vector2(0, 32)
+start_position = "DoorJump"
 flag = "jump"
 
 [node name="Lift" parent="." index="6" instance=ExtResource( "3_qev83" )]

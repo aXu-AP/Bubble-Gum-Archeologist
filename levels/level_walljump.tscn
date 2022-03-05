@@ -27,6 +27,9 @@ polygon = PackedVector2Array(512, -1168, 992, -1168, 992, -848, 784, -848, 784, 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
 polygon = PackedVector2Array(-192, -1408, -192, 96, 1008, 96, 1008, -1408, 1104, -1408, 1104, 176, -304, 176, -304, -1408)
 
+[node name="Door" parent="." index="5"]
+start_position = "DoorWallJump"
+
 [node name="Spikes" parent="." index="6" instance=ExtResource( "3_780r5" )]
 position = Vector2(736, -352)
 z_index = -1

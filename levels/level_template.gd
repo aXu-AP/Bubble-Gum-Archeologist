@@ -4,11 +4,17 @@ extends Node2D
 
 @export var default_music := ""
 @export var default_variant := 0
+@export var start_position : String
+
 
 func _ready() -> void:
 	Globals.current_level = self
 	play_music(default_music, default_variant)
 	$Camera/Camera2D.current = true
+	var start_pos = get_node_or_null(start_position)
+	if start_pos:
+		$Player.global_position = start_pos.global_position + Vector2(0, -27)
+	$Camera.snap_next_frame()
 
 
 func play_music(music : String, variant := 0) -> void:
