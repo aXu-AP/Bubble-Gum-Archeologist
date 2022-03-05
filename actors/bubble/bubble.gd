@@ -1,9 +1,22 @@
 extends RigidDynamicBody2D
 
-var is_player_controlled := true
-@onready var sprite : Node2D = $Polygon2D
-@onready var ray_excludes = [self, $Polygon2D/StaticBody2D]
+var is_player_controlled := true:
+	set(value):
+		is_player_controlled = value
+		# If player controlled, ignore player collision
+		if value:
+			collision_mask &= ~0b100
+		else:
+			# Note: get_tree().create_timer() could result timer outliving this script.
+			var timer = Timer.new()
+			add_child(timer)
+			timer.start(.5)
+			await timer.timeout
+			collision_mask |= 0b100
+@onready var sprite : Node2D = $Soft
+@onready var ray_excludes = [self, $Soft/StaticBody2D]
 var motion_history := []
+var alive := true
 
 
 func _ready() -> void:
@@ -14,6 +27,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not alive:
+		return
+	
 	var bounce_force = 30
 	if is_player_controlled:
 		var direction := Input.get_axis("move_left", "move_right")
@@ -25,22 +41,30 @@ func _physics_process(delta: float) -> void:
 	var ray := PhysicsRayQueryParameters2D.new()
 	ray.from = global_position
 	ray.exclude = ray_excludes
-	ray.collision_mask = 0b11
+	ray.collision_mask = collision_mask | 0b10
 	var avg_dis := Vector2.ZERO
 	var dis_count := 0
+	var total_forces := 0.0
 	for i in 16:
 		var dir = Vector2.RIGHT.rotated(i * TAU / 16)
 		ray.to = ray.from + dir * 32
 		var result := state.intersect_ray(ray)
 		if result:
 			var dis : Vector2 = result.position - ray.to
-			apply_force(dis * bounce_force - linear_velocity * .008, result.position - global_position)
-			apply_force(linear_velocity * .006, -result.position + global_position)
+			apply_force(dis * bounce_force - linear_velocity * .012, result.position - global_position)
+			apply_force(linear_velocity * .01, -result.position + global_position)
 			avg_dis += dis
+			total_forces += dis.length()
 			dis_count += 1
+	if total_forces - avg_dis.length() > 100:
+		die()
+	
+	$Line2D.points = PackedVector2Array([Vector2.ZERO, avg_dis])
+	$Line2D.global_position = global_position
+	
 	if dis_count > 0:
 		avg_dis /= dis_count
-		
+	
 	if sprite.scale.x > .9:
 		sprite.global_rotation = avg_dis.angle()
 	else:
@@ -65,8 +89,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
 
 
-func die():
-	$AnimationPlayer.play("die")
+func die(_discard = null):
+	if alive:
+		$AnimationPlayer.play("die")
+		alive = false
 
 
 func pop_sound():

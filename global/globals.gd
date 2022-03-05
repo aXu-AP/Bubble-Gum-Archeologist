@@ -63,6 +63,8 @@ func _process(delta: float) -> void:
 func reset_game() -> void:
 	flags = {}
 	flags["not_finished"] = true
+	elapsed_time = 0
+	coins = 0
 
 
 func save_game(path = "user://savegame.dat") -> void:
@@ -71,6 +73,7 @@ func save_game(path = "user://savegame.dat") -> void:
 	var savedata = {
 		flags = flags,
 		elapsed_time = elapsed_time,
+		coins = coins
 	}
 	file.store_string(var2str(savedata))
 
@@ -82,3 +85,4 @@ func load_game(path = "user://savegame.dat"):
 		var savedata = str2var(file.get_as_text())
 		flags = savedata.flags
 		elapsed_time = savedata.elapsed_time
+#		coins = savedata.coins

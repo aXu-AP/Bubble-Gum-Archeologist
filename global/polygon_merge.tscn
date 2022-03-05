@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8u10tahdybv2"]
+
+[ext_resource type="Script" path="res://global/polygon_merge.gd" id="1_ypc3x"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_vhrve"]
+
+[node name="PolygonMerge" type="Node2D"]
+script = ExtResource( "1_ypc3x" )
+template_polygon = ExtResource( "2_vhrve" )

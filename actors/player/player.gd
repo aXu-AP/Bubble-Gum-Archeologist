@@ -56,7 +56,12 @@ func _physics_process(delta: float) -> void:
 					motion_velocity.y /= 2.0
 			else:
 				motion_velocity.y += gravity * delta
-			if motion_velocity.y > -50:
+			if is_on_wall_only():
+				animate("wall_slide", .1)
+				look_dir(get_wall_normal().x)
+				if motion_velocity.y > 0:
+					motion_velocity.y -= motion_velocity.y * delta * 2
+			elif motion_velocity.y > -50:
 				animate("fall", .3)
 		else:
 			jumping = false
@@ -65,11 +70,11 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if is_on_floor():
 			if direction:
-				if abs(motion_velocity.x) < 40:
+				if abs(motion_velocity.x) < 40 and was_on_wall < 0:
 					motion_velocity.x = direction * 41
 				else:
 					motion_velocity.x = move_toward(motion_velocity.x, direction * max_speed, acceleration * delta)
-				$PlayerSprite.scale.x = 0.12 if direction > 0 else -0.12
+				look_dir(direction)
 				animate("walk", .1, abs(motion_velocity.x) / 60)
 			else:
 				motion_velocity.x = move_toward(motion_velocity.x, 0, deceleration * delta)
@@ -84,7 +89,7 @@ func _physics_process(delta: float) -> void:
 			elif was_on_wall > 0:
 				motion_velocity.y = jump_velocity * .9
 				motion_velocity += -get_wall_normal() * jump_velocity * .7
-				$PlayerSprite.scale.x = 0.12 if motion_velocity.x > 0 else -0.12
+				look_dir(motion_velocity.x)
 				jumping = true
 			if jumping:
 				animate("jump", .05)
@@ -108,11 +113,14 @@ func _physics_process(delta: float) -> void:
 		
 		global_rotation = lerp_angle(global_rotation, 0, .1)
 	else:
-		animate("bubble", .3)
-#		global_position = target_bubble.global_position
-		global_transform = target_bubble.global_transform
-		motion_velocity = target_bubble.linear_velocity
-		if Input.is_action_just_pressed("bubble"):
+		if is_instance_valid(target_bubble) and target_bubble.alive:
+			animate("bubble", .3)
+	#		global_position = target_bubble.global_position
+			global_transform = target_bubble.global_transform
+			motion_velocity = target_bubble.linear_velocity
+			if Input.is_action_just_pressed("bubble"):
+				burst_bubble()
+		else:
 			burst_bubble()
 	
 	if $HurtArea.get_overlapping_areas().size() > 0:
@@ -145,10 +153,11 @@ func _physics_process(delta: float) -> void:
 
 
 func burst_bubble():
-	motion_velocity.y = min(0, motion_velocity.y) + jump_velocity
-	target_bubble.linear_velocity.y -= jump_velocity * .5
-	target_bubble.is_player_controlled = false
 	is_in_bubble = false
+	motion_velocity.y = min(0, motion_velocity.y) + jump_velocity
+	if is_instance_valid(target_bubble):
+		target_bubble.linear_velocity.y -= jump_velocity * .5
+		target_bubble.is_player_controlled = false
 	move_and_slide()
 
 
@@ -157,3 +166,6 @@ func animate(animation : String, blend := -1.0, speed := 1.0, cooldown := -1.0) 
 		$PlayerSprite/AnimationPlayer.play(animation, blend, speed)
 		animation_cooldown = cooldown
 
+func look_dir(direction : float):
+	$PlayerSprite.scale.x = 0.12 if direction > 0 else -0.12
+	

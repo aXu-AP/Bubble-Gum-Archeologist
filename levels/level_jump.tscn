@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnadsr8v1mduo"]
+[gd_scene load_steps=10 format=3 uid="uid://cfciiqr48gtqi"]
 
 [ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_o717v"]
 [ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_bn7wd"]
+[ext_resource type="PackedScene" uid="uid://c8u10tahdybv2" path="res://global/polygon_merge.tscn" id="2_qpc6h"]
 [ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_qev83"]
+[ext_resource type="Script" path="res://global/circle.gd" id="4_7o0l7"]
 [ext_resource type="PackedScene" uid="uid://ctsb2b4yn7vui" path="res://environment/spikes.tscn" id="4_u2v8u"]
 [ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="5_lvbjv"]
 [ext_resource type="PackedScene" uid="uid://jj4vddhifghi" path="res://actors/coin/coin.tscn" id="6_wxvmj"]
@@ -14,25 +16,42 @@ size = Vector2(64, 128)
 default_music = "explore"
 default_variant = 1
 
-[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_bn7wd" )]
+[node name="PolygonMerge" parent="Walls" index="0" instance=ExtResource( "2_qpc6h" )]
+
+[node name="Brick" parent="Walls/PolygonMerge" index="0" instance=ExtResource( "2_bn7wd" )]
 position = Vector2(0, 96)
 polygon = PackedVector2Array(-128, -64, 320, -64, 320, 0, 320, 64, 0, 64, 0, 368, 320, 368, 320, 480, -128, 480)
+uv = PackedVector2Array(-128, -64, 320, -64, 320, 0, 320, 64, 0, 64, 0, 368, 320, 368, 320, 480, -128, 480)
 
-[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_bn7wd" )]
+[node name="Brick2" parent="Walls/PolygonMerge" index="1" instance=ExtResource( "2_bn7wd" )]
 position = Vector2(600, 112)
 polygon = PackedVector2Array(-152, -80, 0, -80, 0, 16, 40, 16, 40, 80, 136, 80, 136, -80, 264, -80, 264, 80, 416, 80, 416, -72, 520, -120, 520, -176, 616, -176, 744, -304, 808, -304, 808, 464, 258.999, 464, 12, 464, -152, 464)
 
-[node name="Brick3" parent="Walls" index="2" instance=ExtResource( "2_bn7wd" )]
+[node name="Brick3" parent="Walls/PolygonMerge" index="2" instance=ExtResource( "2_bn7wd" )]
 position = Vector2(384, -496)
-polygon = PackedVector2Array(832, 112, -96, 112, -128, 64, -128, -144, 24, -144, 24, 0, 832, 0)
+polygon = PackedVector2Array(832, 112, -96, 112, -128, 80, -128, -144, 24, -144, 24, 0, 832, 0)
 
-[node name="Brick4" parent="Walls" index="3" instance=ExtResource( "2_bn7wd" )]
+[node name="Brick4" parent="Walls/PolygonMerge" index="3" instance=ExtResource( "2_bn7wd" )]
 position = Vector2(1464, -624)
 polygon = PackedVector2Array(-136, 128, 104, 128, 136, 144, 136, 288, 104, 288, 104, 216, 56, 192, -112, 176, -136, 176)
 
-[node name="Brick7" parent="Walls" index="4" instance=ExtResource( "2_bn7wd" )]
+[node name="Brick7" parent="Walls/PolygonMerge" index="4" instance=ExtResource( "2_bn7wd" )]
 position = Vector2(1680, -464)
-polygon = PackedVector2Array(-48, -16, -16, -32, 32, -32, 32, -312, -24, -424, -24, -600, 112, -624, 176, -624, 176, 1104, -2000, 1104, -2000, -248, -1736, -248, -1736, -168, -1872, -112, -1872, 1040, -144, 1040, -144, 992, 32, 992, 32, 912, -144, 912, -144, 240, -112, 224, -104, 208, -48, 208)
+polygon = PackedVector2Array(-48, -16, -16, -32, 32, -32, 32, -312, -24, -424, -24, -600, 112, -624, 176, -624, 176, 1104, -2000, 1104, -2000, -248, -1736, -248, -1736, -168, -1808, -112, -1808, 1040, -144, 1040, -144, 992, 32, 992, 32, 912, -144, 912, -144, 208, -48, 208)
+
+[node name="Polygon2D" type="Polygon2D" parent="Walls/PolygonMerge" index="5"]
+position = Vector2(288, -416)
+polygon = PackedVector2Array(32, 0, 30.4338, 9.88854, 25.8885, 18.8091, 18.8091, 25.8885, 9.88854, 30.4338, -9.53674e-07, 32, -9.88855, 30.4338, -18.8091, 25.8885, -25.8885, 18.8091, -30.4338, 9.88855, -32, 0, -30.4338, -9.88855, -25.8886, -18.8091, -18.8091, -25.8886, -9.88855, -30.4338, 0, -32, 9.88855, -30.4338, 18.8091, -25.8886, 25.8886, -18.8091, 30.4338, -9.88855)
+script = ExtResource( "4_7o0l7" )
+radius = 32.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="Walls/PolygonMerge" index="6" groups=["remove"]]
+position = Vector2(1536, -266)
+scale = Vector2(2.46875, 0.953123)
+color = Color(0.188235, 0.152941, 0.14902, 1)
+polygon = PackedVector2Array(32, 0, 30.4338, 9.88854, 25.8885, 18.8091, 18.8091, 25.8885, 9.88854, 30.4338, -9.53674e-07, 32, -9.88855, 30.4338, -18.8091, 25.8885, -25.8885, 18.8091, -30.4338, 9.88855, -32, 0, -30.4338, -9.88855, -25.8886, -18.8091, -18.8091, -25.8886, -9.88855, -30.4338, 0, -32, 9.88855, -30.4338, 18.8091, -25.8886, 25.8886, -18.8091, 30.4338, -9.88855)
+script = ExtResource( "4_7o0l7" )
+radius = 32.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
 polygon = PackedVector2Array(-256, -712, -256, 608, 1792, 608, 1792, -1088, 1856, -1088, 1856, 640, -320, 640, -320, -712)

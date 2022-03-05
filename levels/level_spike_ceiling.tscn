@@ -130,6 +130,7 @@ shape = SubResource( "RectangleShape2D_8lw7u" )
 
 [node name="SpikeCeiling" type="AnimatableBody2D" parent="." index="6"]
 position = Vector2(0, -864)
+z_index = 10
 
 [node name="Brick" parent="SpikeCeiling" index="0" instance=ExtResource( "2_ps5v8" )]
 color = Color(0.862745, 0.705882, 0.701961, 1)

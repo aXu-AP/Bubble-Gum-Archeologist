@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 			current_zone = zone
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var params : CameraParameters = default_parameters
 	if current_zone:
 		params = current_zone.parameters
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 		target_pos += player_motion_smoothed
 		motion_velocity = target_pos - global_position
 		
-	motion_velocity *= 3
+	motion_velocity *= 6
 	
 	move_and_slide()
 	

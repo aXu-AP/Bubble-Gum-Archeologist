@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm560h8k8iroc"]
+[gd_scene load_steps=9 format=3 uid="uid://cm560h8k8iroc"]
 
 [ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_tls2w"]
+[ext_resource type="PackedScene" uid="uid://c8u10tahdybv2" path="res://global/polygon_merge.tscn" id="2_03vmg"]
 [ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_pgnin"]
 [ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_1rwwq"]
 [ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="4_qwjcf"]
@@ -17,40 +18,42 @@ default_variant = 1
 [node name="Player" parent="." index="1"]
 position = Vector2(0, -32)
 
-[node name="Brick" parent="Walls" index="0" instance=ExtResource( "2_pgnin" )]
+[node name="PolygonMerge" parent="Walls" index="0" instance=ExtResource( "2_03vmg" )]
+
+[node name="Brick" parent="Walls/PolygonMerge" index="0" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-128, 64)
 polygon = PackedVector2Array(960, 320, 960, 448, 1152, 448, 1152, 352)
 
-[node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_pgnin" )]
+[node name="Brick2" parent="Walls/PolygonMerge" index="1" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-256, 128)
 polygon = PackedVector2Array(512, -384, 512, 192, 384.677, 242.929, 192, 320, 192, 448, 640, 448, 640, 320, 576, 320, 576, 192, 896, 192, 896, 320, 704, 320, 704, 448, 960, 448, 960, 384, 1024, 320, 1024, 0, 896, -128, 704, -128, 640, -192, 576, -255.964, 576, -448)
 
-[node name="Brick3" parent="Walls" index="2" instance=ExtResource( "2_pgnin" )]
+[node name="Brick3" parent="Walls/PolygonMerge" index="2" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-256, 128)
 polygon = PackedVector2Array(-64, -704, 64, -704, 63.6288, -128, 448, -128, 448, 112, 400, 128, 128, 128, 96, 160, 64, 190.818, 64, 257.317, 128, 320, 128, 448, 64, 512, 64, 544, 1216, 544, 1472, 416, 1472, 768, 2048.75, 768, 2048, -704, 2176, -704, 2176, 832, -64, 832)
 
-[node name="Brick4" parent="Walls" index="3" instance=ExtResource( "2_pgnin" )]
+[node name="Brick4" parent="Walls/PolygonMerge" index="3" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-256, 128)
 polygon = PackedVector2Array(1536, 384, 1856, 384, 1856, 768, 1536, 768)
 
-[node name="Brick5" parent="Walls" index="4" instance=ExtResource( "2_pgnin" )]
+[node name="Brick5" parent="Walls/PolygonMerge" index="4" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-512, 256)
 polygon = PackedVector2Array(1408, -64, 1728, -64, 1728, 128, 1600, 128, 1471.96, -0.0386505, 1408, 0)
 
-[node name="Brick6" parent="Walls" index="5" instance=ExtResource( "2_pgnin" )]
+[node name="Brick6" parent="Walls/PolygonMerge" index="5" instance=ExtResource( "2_pgnin" )]
 position = Vector2(512, 0)
 polygon = PackedVector2Array(832, 192, 832, 304, 1024, 448, 1152, 448)
 
-[node name="Brick7" parent="Walls" index="6" instance=ExtResource( "2_pgnin" )]
+[node name="Brick7" parent="Walls/PolygonMerge" index="6" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-1024, 512)
 polygon = PackedVector2Array(2368, -512, 2512, -592, 2688, -592, 2688, -448, 2368, -448)
 
-[node name="Brick8" parent="Walls" index="7" instance=ExtResource( "2_pgnin" )]
+[node name="Brick8" parent="Walls/PolygonMerge" index="7" instance=ExtResource( "2_pgnin" )]
 position = Vector2(-304, 128)
 polygon = PackedVector2Array(704, -384, 704, -320, 832, -320, 832, -384)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
-polygon = PackedVector2Array(-256, -576, -256, 768, 896, 768, 1152, 928, 1856, 928, 1856, -576, 1920, -576, 1920, 960, -320, 960, -320, -576)
+polygon = PackedVector2Array(-256, -576, -256, 768, 576, 768, 896, 928, 1856, 928, 1856, -576, 1920, -576, 1920, 960, -320, 960, -320, -576)
 
 [node name="Door" parent="." index="5"]
 flag = "climb"

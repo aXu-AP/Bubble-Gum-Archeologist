@@ -123,4 +123,4 @@ autoplay = true
 max_distance = 500.0
 bus = &"Sfx"
 
-[connection signal="area_entered" from="." to="." method="_on_tablet_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_tablet_area_entered" flags=6]

@@ -21,6 +21,7 @@ polygon = PackedVector2Array(-1280, -880, -1088, -520, -1089.49, 0, -512, 0, -51
 
 [node name="Brick2" parent="Walls" index="1" instance=ExtResource( "2_gywg8" )]
 polygon = PackedVector2Array(-2.79753e-06, -64, 64, -64, 64, -256, -576, -256, -576, -192, -8.39259e-06, -192)
+uv = PackedVector2Array(-2.79753e-06, -64, 64, -64, 64, -256, -576, -256, -576, -192, -8.39259e-06, -192)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
 polygon = PackedVector2Array(-1152, -640, -1152, 320, 192, 320, 192, -736, 328, -752, 344, 496, -1312, 472, -1288, -680)

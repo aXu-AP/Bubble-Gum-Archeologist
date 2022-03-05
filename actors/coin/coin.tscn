@@ -102,4 +102,4 @@ anims/float = SubResource( "Animation_xd2rh" )
 stream = ExtResource( "3_32ybq" )
 bus = &"Sfx"
 
-[connection signal="area_entered" from="." to="." method="_on_coin_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_coin_area_entered" flags=6]

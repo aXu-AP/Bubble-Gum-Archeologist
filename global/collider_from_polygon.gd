@@ -18,7 +18,8 @@ func _ready() -> void:
 			linepoints.append(linepoints[0])
 		line.points = linepoints
 		line.default_color = Color("000000")
-		line.width = 1
+		line.width = 2
+		line.z_index = -1
 		line.end_cap_mode = Line2D.LINE_CAP_ROUND
 		line.joint_mode = Line2D.LINE_JOINT_ROUND
 		line.transform = transform
