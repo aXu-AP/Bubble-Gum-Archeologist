@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq0i6jmkv0gda"]
+[gd_scene load_steps=27 format=3 uid="uid://dq0i6jmkv0gda"]
 
 [ext_resource type="Texture2D" uid="uid://d1ybsperunvr" path="res://actors/player/archeolog.png" id="1_pijgd"]
 [ext_resource type="Script" path="res://actors/player/player_sprite.gd" id="1_ulr48"]
@@ -774,6 +774,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_26tld"]
 resource_name = "landing"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1196,6 +1197,99 @@ tracks/11/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_04ixl"]
+animation = &"landing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrhay"]
+animation = &"bubble"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a6hxu"]
+animation = &"wall_slide"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pgqhm"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y52xe"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aescn"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_w8t0q"]
+input_count = 2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "walk"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0ouk"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_syu6j"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_8xdwe"]
+blend_point_0/node = SubResource( "AnimationNodeAnimation_c0ouk" )
+blend_point_0/pos = -100.0
+blend_point_1/node = SubResource( "AnimationNodeAnimation_syu6j" )
+blend_point_1/pos = 100.0
+min_space = -100.0
+max_space = 100.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_d0wao"]
+mix_mode = 1
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_h5g4t"]
+input_count = 3
+input_0/name = "ground"
+input_0/auto_advance = false
+input_1/name = "air"
+input_1/auto_advance = false
+input_2/name = "wall"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ou6ju"]
+input_count = 3
+input_0/name = "normal"
+input_0/auto_advance = false
+input_1/name = "bubble"
+input_1/auto_advance = false
+input_2/name = "dead"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_o2a1n"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dluxn"]
+graph_offset = Vector2(-796.937, -290.333)
+"nodes/Animation 10/node" = SubResource( "AnimationNodeAnimation_04ixl" )
+"nodes/Animation 10/position" = Vector2(-400, -160)
+"nodes/Animation 2/node" = SubResource( "AnimationNodeAnimation_wrhay" )
+"nodes/Animation 2/position" = Vector2(440, 440)
+"nodes/Animation 3/node" = SubResource( "AnimationNodeAnimation_a6hxu" )
+"nodes/Animation 3/position" = Vector2(160, 426.667)
+"nodes/Animation 5/node" = SubResource( "AnimationNodeAnimation_pgqhm" )
+"nodes/Animation 5/position" = Vector2(440, 586.667)
+"nodes/Animation 6/node" = SubResource( "AnimationNodeAnimation_y52xe" )
+"nodes/Animation 6/position" = Vector2(-400, 0)
+"nodes/Animation 7/node" = SubResource( "AnimationNodeAnimation_aescn" )
+"nodes/Animation 7/position" = Vector2(-400, -280)
+nodes/ground_state/node = SubResource( "AnimationNodeTransition_w8t0q" )
+nodes/ground_state/position = Vector2(200, -93.3333)
+nodes/jump_direction/node = SubResource( "AnimationNodeBlendSpace1D_8xdwe" )
+nodes/jump_direction/position = Vector2(173.333, 253.333)
+nodes/landed/node = SubResource( "AnimationNodeOneShot_d0wao" )
+nodes/landed/position = Vector2(-13.3333, -320)
+nodes/location/node = SubResource( "AnimationNodeTransition_h5g4t" )
+nodes/location/position = Vector2(453.333, 133.333)
+nodes/main_state/node = SubResource( "AnimationNodeTransition_ou6ju" )
+nodes/main_state/position = Vector2(720, 253.333)
+nodes/output/position = Vector2(960, 253.333)
+nodes/walk_speed/node = SubResource( "AnimationNodeTimeScale_o2a1n" )
+nodes/walk_speed/position = Vector2(-213.333, -13.3333)
+node_connections = [&"output", 0, &"main_state", &"location", 0, &"ground_state", &"location", 1, &"jump_direction", &"location", 2, &"Animation 3", &"landed", 0, &"Animation 7", &"landed", 1, &"Animation 10", &"main_state", 0, &"location", &"main_state", 1, &"Animation 2", &"main_state", 2, &"Animation 5", &"walk_speed", 0, &"Animation 6", &"ground_state", 0, &"landed", &"ground_state", 1, &"walk_speed"]
+
 [node name="PlayerSprite" type="Node2D"]
 script = ExtResource( "1_ulr48" )
 
@@ -1270,6 +1364,18 @@ anims/jump = SubResource( "Animation_2drk2" )
 anims/landing = SubResource( "Animation_26tld" )
 anims/walk = SubResource( "Animation_l82tu" )
 anims/wall_slide = SubResource( "Animation_g7jnr" )
+blend_times = [&"landing", &"bubble", 0.3, &"landing", &"die", 0.6, &"landing", &"fall", 0.3, &"landing", &"idle", 0.2, &"landing", &"jump", 0.05, &"landing", &"landing", 0.2, &"landing", &"walk", 0.1, &"landing", &"wall_slide", 0.1]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( "AnimationNodeBlendTree_dluxn" )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/ground_state/current = 0
+parameters/jump_direction/blend_position = -38.7518
+parameters/landed/active = false
+parameters/location/current = 0
+parameters/main_state/current = 0
+parameters/walk_speed/scale = 1.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false

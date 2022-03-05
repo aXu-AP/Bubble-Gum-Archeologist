@@ -12,16 +12,18 @@ var is_in_bubble := false
 var can_use_bubble := true
 var jumping := false
 var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var was_on_floor := 0.0
+var was_on_floor := 0.1
 var was_on_wall := 0.0
 var was_jump_pressed := 0.0
 var animation_cooldown := 0.0
 var invincibility_cooldown := 0.0
 var alive = true
+@onready var animation : AnimationTree = $PlayerSprite/AnimationTree
 
 
 func _physics_process(delta: float) -> void:
 	if not alive:
+		animation.set("parameters/main_state/current", "dead")
 		return
 	was_on_floor -= delta
 	was_on_wall -= delta
@@ -29,6 +31,7 @@ func _physics_process(delta: float) -> void:
 	animation_cooldown -= delta
 	invincibility_cooldown -= delta
 	if not is_in_bubble:
+		animation.set("parameters/main_state/current", 0)
 		if Input.is_action_just_pressed("enter_door") and is_on_floor():
 			var areas = $DoorArea.get_overlapping_areas()
 			for door in areas:
@@ -38,16 +41,20 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("jump"):
 			was_jump_pressed = .1
+		
 		if is_on_floor():
+			animation.set("parameters/location/current", 0)
 			if was_on_floor < 0:
-				$PlayerSprite/AnimationPlayer.stop()
-				animate("fall")
-				animate("landing", 0.2, 1)
+				animation.set("parameters/landed/active", true)
 			was_on_floor = .2
 			was_on_wall = 0
 			can_use_bubble = true
-		if is_on_wall_only():
+		elif is_on_wall_only():
 			was_on_wall = .2
+			animation.set("parameters/location/current", 2)
+		else:
+			animation.set("parameters/location/current", 1)
+			animation.set("parameters/jump_direction/blend_position", motion_velocity.y)
 		
 		if not is_on_floor():
 			if motion_velocity.y < 0 and jumping:
@@ -57,12 +64,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				motion_velocity.y += gravity * delta
 			if is_on_wall_only():
-				animate("wall_slide", .1)
 				look_dir(get_wall_normal().x)
 				if motion_velocity.y > 0:
 					motion_velocity.y -= motion_velocity.y * delta * 2
-			elif motion_velocity.y > -50:
-				animate("fall", .3)
 		else:
 			jumping = false
 		
@@ -75,10 +79,12 @@ func _physics_process(delta: float) -> void:
 				else:
 					motion_velocity.x = move_toward(motion_velocity.x, direction * max_speed, acceleration * delta)
 				look_dir(direction)
-				animate("walk", .1, abs(motion_velocity.x) / 60)
+				animation.set("parameters/ground_state/current", 1)
+				animation.set("parameters/landed/active", false)
+				animation.set("parameters/walk_speed/scale", abs(motion_velocity.x) / 60)
 			else:
 				motion_velocity.x = move_toward(motion_velocity.x, 0, deceleration * delta)
-				animate("idle", .2)
+				animation.set("parameters/ground_state/current", 0)
 		else:
 			motion_velocity.x = move_toward(motion_velocity.x, direction * max(max_speed, abs(motion_velocity.x)), acceleration_air * delta)
 		
@@ -92,7 +98,6 @@ func _physics_process(delta: float) -> void:
 				look_dir(motion_velocity.x)
 				jumping = true
 			if jumping:
-				animate("jump", .05)
 				was_jump_pressed = 0
 				was_on_floor = 0
 				was_on_wall = 0
@@ -113,9 +118,8 @@ func _physics_process(delta: float) -> void:
 		
 		global_rotation = lerp_angle(global_rotation, 0, .1)
 	else:
+		animation.set("parameters/main_state/current", 1)
 		if is_instance_valid(target_bubble) and target_bubble.alive:
-			animate("bubble", .3)
-	#		global_position = target_bubble.global_position
 			global_transform = target_bubble.global_transform
 			motion_velocity = target_bubble.linear_velocity
 			if Input.is_action_just_pressed("bubble"):
@@ -130,7 +134,6 @@ func _physics_process(delta: float) -> void:
 			invincibility_cooldown = .5
 		elif invincibility_cooldown < 0:
 			alive = false
-			animate("die", .6)
 			Sfx.play_sfx("dead", global_position)
 			var dead_body = RigidDynamicBody2D.new()
 			dead_body.global_transform = global_transform
@@ -160,11 +163,6 @@ func burst_bubble():
 		target_bubble.is_player_controlled = false
 	move_and_slide()
 
-
-func animate(animation : String, blend := -1.0, speed := 1.0, cooldown := -1.0) -> void:
-	if animation_cooldown < 0:
-		$PlayerSprite/AnimationPlayer.play(animation, blend, speed)
-		animation_cooldown = cooldown
 
 func look_dir(direction : float):
 	$PlayerSprite.scale.x = 0.12 if direction > 0 else -0.12
