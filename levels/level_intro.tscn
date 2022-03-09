@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://djdtdxolvxf27"]
+
+[ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_erc80"]
+[ext_resource type="PackedScene" uid="uid://c8u10tahdybv2" path="res://global/polygon_merge.tscn" id="2_r77jv"]
+[ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="3_nqyhm"]
+[ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="4_dyqr2"]
+
+[node name="Level" instance=ExtResource( "1_erc80" )]
+default_music = "explore"
+start_position = ""
+
+[node name="Player" parent="." index="1"]
+position = Vector2(-1120, -32)
+
+[node name="Camera" parent="." index="2"]
+position = Vector2(-1120, -32)
+
+[node name="PolygonMerge" parent="Walls" index="0" instance=ExtResource( "2_r77jv" )]
+
+[node name="Brick" parent="Walls/PolygonMerge" index="0" instance=ExtResource( "3_nqyhm" )]
+polygon = PackedVector2Array(-1216, 0, -896, 0, -896, -64, -768, -64, -768, 0, -704, 0, -704, -64, -512, -64, -384, 0, -128, 0, -128, -192, 0, -192, 32, -256, 66.2328, -192, 256, -192, 256, 256, -1216, 256)
+
+[node name="Brick3" parent="Walls/PolygonMerge" index="1" instance=ExtResource( "3_nqyhm" )]
+polygon = PackedVector2Array(-512, -144, -512, -128, -256, -176, -256, -192)
+
+[node name="Brick2" parent="Walls/PolygonMerge" index="2" instance=ExtResource( "3_nqyhm" )]
+polygon = PackedVector2Array(-1216, -640, -1216, 256, 256, 256, 256, -896, 384, -896, 384, 384, -1344, 384, -1344, -640)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraCollision" index="0"]
+polygon = PackedVector2Array(-1280, -640, -1280, 144, 320, 144, 320, -896, 384, -896, 384, 240, -1344, 240, -1344, -640)
+
+[node name="Door" parent="." index="5"]
+position = Vector2(160, -192)
+start_position = "DoorIntro"
+closed_if_flag = false
+
+[node name="Label" type="Label" parent="." index="6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1168.0
+offset_top = -144.0
+offset_right = -1059.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( "4_dyqr2" )
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "A  D
+<- ->"
+horizontal_alignment = 1
+__meta__ = {
+"_edit_use_custom_anchors": true
+}
+
+[node name="Label2" type="Label" parent="." index="7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -976.0
+offset_top = -144.0
+offset_right = -867.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( "4_dyqr2" )
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "SPACE
+Z"
+horizontal_alignment = 1
+__meta__ = {
+"_edit_use_custom_anchors": true
+}
+
+[node name="Label3" type="Label" parent="." index="8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = -384.0
+offset_right = 221.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( "4_dyqr2" )
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "W
+^"
+horizontal_alignment = 1
+__meta__ = {
+"_edit_use_custom_anchors": true
+}

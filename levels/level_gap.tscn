@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://fuerbqc1cxpp"]
+[gd_scene load_steps=11 format=3 uid="uid://fuerbqc1cxpp"]
 
 [ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_14588"]
 [ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_d5h1a"]
+[ext_resource type="Script" path="res://levels/level_gap.gd" id="2_k4nen"]
 [ext_resource type="PackedScene" uid="uid://s3q430cxf7nw" path="res://environment/lift.tscn" id="3_ppwsj"]
 [ext_resource type="Script" path="res://global/camera_zone.gd" id="4_q2m6y"]
 [ext_resource type="Script" path="res://global/camera_parameters.gd" id="5_juqkb"]
 [ext_resource type="PackedScene" uid="uid://wnm6k3fbq1du" path="res://actors/tablet/tablet.tscn" id="6_pbyim"]
+[ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="7_8w7su"]
 
 [sub_resource type="Resource" id="Resource_5u1sr"]
 script = ExtResource( "5_juqkb" )
@@ -18,6 +20,7 @@ zoom = 0.65
 size = Vector2(896, 704)
 
 [node name="Level" instance=ExtResource( "1_14588" )]
+script = ExtResource( "2_k4nen" )
 default_music = "explore"
 default_variant = 1
 
@@ -57,6 +60,7 @@ position = Vector2(0, 16)
 points = PackedVector2Array(0, 0, 0, 392)
 
 [node name="CameraZone1" type="Area2D" parent="." index="7"]
+process_mode = 4
 position = Vector2(1600, 512)
 collision_layer = 8
 collision_mask = 8
@@ -71,6 +75,27 @@ shape = SubResource( "RectangleShape2D_l8rdt" )
 position = Vector2(2304, 352)
 flag = "gap"
 
+[node name="Label" type="Label" parent="." index="9"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1440.0
+offset_top = 224.0
+offset_right = 1549.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( "7_8w7su" )
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "E
+X"
+horizontal_alignment = 1
+__meta__ = {
+"_edit_use_custom_anchors": true
+}
+
+[connection signal="area_entered" from="Tablet" to="." method="_on_tablet_area_entered" flags=6]
 [connection signal="area_entered" from="Tablet" to="." method="play_explore_2"]
 
 [editable path="Lift"]

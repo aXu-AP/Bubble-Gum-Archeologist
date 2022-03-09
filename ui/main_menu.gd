@@ -7,7 +7,10 @@ func _ready() -> void:
 
 
 func _on_button_start_pressed() -> void:
-	Globals.load_and_change_level("res://levels/level_hub.tscn")
+	if Globals.flags.get("intro", false):
+		Globals.load_and_change_level("res://levels/level_hub.tscn")
+	else:
+		Globals.load_and_change_level("res://levels/level_intro.tscn")
 	queue_free()
 
 

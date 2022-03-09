@@ -1288,7 +1288,7 @@ nodes/main_state/position = Vector2(720, 253.333)
 nodes/output/position = Vector2(960, 253.333)
 nodes/walk_speed/node = SubResource( "AnimationNodeTimeScale_o2a1n" )
 nodes/walk_speed/position = Vector2(-213.333, -13.3333)
-node_connections = [&"output", 0, &"main_state", &"location", 0, &"ground_state", &"location", 1, &"jump_direction", &"location", 2, &"Animation 3", &"landed", 0, &"Animation 7", &"landed", 1, &"Animation 10", &"main_state", 0, &"location", &"main_state", 1, &"Animation 2", &"main_state", 2, &"Animation 5", &"walk_speed", 0, &"Animation 6", &"ground_state", 0, &"landed", &"ground_state", 1, &"walk_speed"]
+node_connections = [&"output", 0, &"main_state", &"location", 0, &"ground_state", &"location", 1, &"jump_direction", &"location", 2, &"Animation 3", &"landed", 0, &"Animation 7", &"landed", 1, &"Animation 10", &"ground_state", 0, &"landed", &"ground_state", 1, &"walk_speed", &"walk_speed", 0, &"Animation 6", &"main_state", 0, &"location", &"main_state", 1, &"Animation 2", &"main_state", 2, &"Animation 5"]
 
 [node name="PlayerSprite" type="Node2D"]
 script = ExtResource( "1_ulr48" )

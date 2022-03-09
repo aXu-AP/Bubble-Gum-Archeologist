@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dug2vk07q0fjm"]
+[gd_scene load_steps=9 format=3 uid="uid://c0dbb8wx4gppd"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_hb7rr"]
 [ext_resource type="Theme" uid="uid://1bk43dvjwq68" path="res://ui/theme.tres" id="2_obr4f"]
@@ -85,9 +85,6 @@ process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( "2_obr4f" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PanelContainer" type="PanelContainer" parent="Pause/Control"]
 anchor_left = 0.15
@@ -96,9 +93,6 @@ anchor_right = 0.45
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="Pause/Control/PanelContainer"]
 offset_right = 709.0
@@ -153,6 +147,7 @@ has_sound = false
 
 [node name="AnimationPlayer" parent="Node2D/PlayerSprite" index="1"]
 autoplay = "walk"
+blend_times = [&"landing", &"bubble", 0.3, &"landing", &"die", 0.6, &"landing", &"fall", 0.3, &"landing", &"idle", 0.2, &"landing", &"jump", 0.05, &"landing", &"landing", 0.2, &"landing", &"walk", 0.1, &"landing", &"wall_slide", 0.1]
 
 [node name="AnimationTree" parent="Node2D/PlayerSprite" index="2"]
 active = false
