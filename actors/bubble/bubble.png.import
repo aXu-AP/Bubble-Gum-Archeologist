@@ -1,9 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://bjjeleivvy3g8"
-path="res://.godot/imported/bubble.png-0e10fbdb2bfc46eefa699698f551fbdb.stex"
+path="res://.godot/imported/bubble.png-0e10fbdb2bfc46eefa699698f551fbdb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://actors/bubble/bubble.png"
-dest_files=["res://.godot/imported/bubble.png-0e10fbdb2bfc46eefa699698f551fbdb.stex"]
+dest_files=["res://.godot/imported/bubble.png-0e10fbdb2bfc46eefa699698f551fbdb.ctex"]
 
 [params]
 

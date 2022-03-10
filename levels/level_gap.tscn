@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://fuerbqc1cxpp"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="PackedScene" uid="uid://jv0b3ow43y31" path="res://levels/level_template.tscn" id="1_14588"]
 [ext_resource type="PackedScene" uid="uid://cmmfoj016di3a" path="res://environment/brick.tscn" id="2_d5h1a"]
@@ -95,7 +95,7 @@ __meta__ = {
 "_edit_use_custom_anchors": true
 }
 
-[connection signal="area_entered" from="Tablet" to="." method="_on_tablet_area_entered" flags=6]
 [connection signal="area_entered" from="Tablet" to="." method="play_explore_2"]
+[connection signal="area_entered" from="Tablet" to="." method="_on_tablet_area_entered" flags=6]
 
 [editable path="Lift"]

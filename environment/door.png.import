@@ -1,9 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://8q2npuodm4je"
-path="res://.godot/imported/door.png-bf147d3c309d1c25c45c9b98f295f3e3.stex"
+path="res://.godot/imported/door.png-bf147d3c309d1c25c45c9b98f295f3e3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://environment/door.png"
-dest_files=["res://.godot/imported/door.png-bf147d3c309d1c25c45c9b98f295f3e3.stex"]
+dest_files=["res://.godot/imported/door.png-bf147d3c309d1c25c45c9b98f295f3e3.ctex"]
 
 [params]
 
@@ -29,6 +29,6 @@ roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
-process/HDR_as_SRGB=false
+process/hdr_as_srgb=false
 process/size_limit=0
 detect_3d/compress_to=1

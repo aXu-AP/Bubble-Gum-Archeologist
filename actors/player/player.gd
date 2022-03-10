@@ -54,19 +54,19 @@ func _physics_process(delta: float) -> void:
 			animation.set("parameters/location/current", 2)
 		else:
 			animation.set("parameters/location/current", 1)
-			animation.set("parameters/jump_direction/blend_position", motion_velocity.y)
+			animation.set("parameters/jump_direction/blend_position", velocity.y)
 		
 		if not is_on_floor():
-			if motion_velocity.y < 0 and jumping:
-				motion_velocity.y += gravity * delta * .5
+			if velocity.y < 0 and jumping:
+				velocity.y += gravity * delta * .5
 				if Input.is_action_just_released("jump"):
-					motion_velocity.y /= 2.0
+					velocity.y /= 2.0
 			else:
-				motion_velocity.y += gravity * delta
+				velocity.y += gravity * delta
 			if is_on_wall_only():
 				look_dir(get_wall_normal().x)
-				if motion_velocity.y > 0:
-					motion_velocity.y -= motion_velocity.y * delta * 2
+				if velocity.y > 0:
+					velocity.y -= velocity.y * delta * 2
 		else:
 			jumping = false
 		
@@ -74,28 +74,28 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if is_on_floor():
 			if direction:
-				if abs(motion_velocity.x) < 40 and was_on_wall < 0:
-					motion_velocity.x = direction * 41
+				if abs(velocity.x) < 40 and was_on_wall < 0:
+					velocity.x = direction * 41
 				else:
-					motion_velocity.x = move_toward(motion_velocity.x, direction * max_speed, acceleration * delta)
+					velocity.x = move_toward(velocity.x, direction * max_speed, acceleration * delta)
 				look_dir(direction)
 				animation.set("parameters/ground_state/current", 1)
 				animation.set("parameters/landed/active", false)
-				animation.set("parameters/walk_speed/scale", abs(motion_velocity.x) / 60)
+				animation.set("parameters/walk_speed/scale", abs(velocity.x) / 60)
 			else:
-				motion_velocity.x = move_toward(motion_velocity.x, 0, deceleration * delta)
+				velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 				animation.set("parameters/ground_state/current", 0)
 		else:
-			motion_velocity.x = move_toward(motion_velocity.x, direction * max(max_speed, abs(motion_velocity.x)), acceleration_air * delta)
+			velocity.x = move_toward(velocity.x, direction * max(max_speed, abs(velocity.x)), acceleration_air * delta)
 		
 		if was_jump_pressed > 0:
 			if was_on_floor > 0:
-				motion_velocity.y = jump_velocity
+				velocity.y = jump_velocity
 				jumping = true
 			elif was_on_wall > 0:
-				motion_velocity.y = jump_velocity * .9
-				motion_velocity += -get_wall_normal() * jump_velocity * .7
-				look_dir(motion_velocity.x)
+				velocity.y = jump_velocity * .9
+				velocity += -get_wall_normal() * jump_velocity * .7
+				look_dir(velocity.x)
 				jumping = true
 			if jumping:
 				was_jump_pressed = 0
@@ -109,7 +109,7 @@ func _physics_process(delta: float) -> void:
 				target_bubble.die()
 			
 			target_bubble = preload("res://actors/bubble/bubble.tscn").instantiate()
-			target_bubble.linear_velocity = motion_velocity
+			target_bubble.linear_velocity = velocity
 			target_bubble.global_position = global_position
 			get_parent().add_child(target_bubble)
 			is_in_bubble = true
@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 		animation.set("parameters/main_state/current", 1)
 		if is_instance_valid(target_bubble) and target_bubble.alive:
 			global_transform = target_bubble.global_transform
-			motion_velocity = target_bubble.linear_velocity
+			velocity = target_bubble.linear_velocity
 			if Input.is_action_just_pressed("bubble"):
 				burst_bubble()
 		else:
@@ -137,7 +137,7 @@ func _physics_process(delta: float) -> void:
 			Sfx.play_sfx("dead", global_position)
 			var dead_body = RigidDynamicBody2D.new()
 			dead_body.global_transform = global_transform
-			dead_body.linear_velocity = Vector2(motion_velocity.x * .5, motion_velocity.y - 200)
+			dead_body.linear_velocity = Vector2(velocity.x * .5, velocity.y - 200)
 			dead_body.angular_velocity = randf_range(5, 10) * -sign($PlayerSprite.scale.x)
 			var mat = PhysicsMaterial.new()
 			mat.friction = .4
@@ -157,7 +157,7 @@ func _physics_process(delta: float) -> void:
 
 func burst_bubble():
 	is_in_bubble = false
-	motion_velocity.y = min(0, motion_velocity.y) + jump_velocity
+	velocity.y = min(0, velocity.y) + jump_velocity
 	if is_instance_valid(target_bubble):
 		target_bubble.linear_velocity.y -= jump_velocity * .5
 		target_bubble.is_player_controlled = false

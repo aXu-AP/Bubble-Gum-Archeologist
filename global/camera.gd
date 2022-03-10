@@ -39,32 +39,32 @@ func _process(_delta: float) -> void:
 		last_player_y = player.global_position.y
 		
 	if params.mode == CameraParameters.CameraMode.fixed:
-		motion_velocity = (params.target.global_position + params.offset) - global_position
+		velocity = (params.target.global_position + params.offset) - global_position
 	elif params.mode == CameraParameters.CameraMode.follow:
 		var target_pos = Vector2(player.global_position.x, last_player_y) + params.offset
 		var player_motion := Vector2.ZERO
-		player_motion.x = max(0, abs(player.motion_velocity.x) - 20) * 1.2 * sign(player.motion_velocity.x)
-		player_motion.y = max(0, abs(player.motion_velocity.y) - 400) * 1.2 * sign(player.motion_velocity.y)
+		player_motion.x = max(0, abs(player.velocity.x) - 20) * 1.2 * sign(player.velocity.x)
+		player_motion.y = max(0, abs(player.velocity.y) - 400) * 1.2 * sign(player.velocity.y)
 		player_motion_smoothed = player_motion_smoothed.lerp(player_motion, .01)
 		target_pos += player_motion_smoothed
-		motion_velocity = target_pos - global_position
+		velocity = target_pos - global_position
 		
 		if is_snapping_on_next_frame:
 			global_position = target_pos
-			motion_velocity = Vector2.ZERO
+			velocity = Vector2.ZERO
 			is_snapping_on_next_frame = false
 		
-	motion_velocity *= 6
+	velocity *= 6
 	
 	move_and_slide()
 	
 	var screen_margin = (Vector2(1980, 1080) / 2 - Vector2(200, 200)) * global_scale
 	var target_move = global_position.clamp(player.global_position - screen_margin, player.global_position + screen_margin) - global_position
 	if target_move.length() > 10:
-		var keep_motion = motion_velocity
-		motion_velocity = target_move * 10
+		var keep_motion = velocity
+		velocity = target_move * 10
 		move_and_slide()
-		motion_velocity = keep_motion
+		velocity = keep_motion
 
 
 var is_snapping_on_next_frame := false

@@ -1288,7 +1288,7 @@ nodes/main_state/position = Vector2(720, 253.333)
 nodes/output/position = Vector2(960, 253.333)
 nodes/walk_speed/node = SubResource( "AnimationNodeTimeScale_o2a1n" )
 nodes/walk_speed/position = Vector2(-213.333, -13.3333)
-node_connections = [&"output", 0, &"main_state", &"location", 0, &"ground_state", &"location", 1, &"jump_direction", &"location", 2, &"Animation 3", &"landed", 0, &"Animation 7", &"landed", 1, &"Animation 10", &"ground_state", 0, &"landed", &"ground_state", 1, &"walk_speed", &"walk_speed", 0, &"Animation 6", &"main_state", 0, &"location", &"main_state", 1, &"Animation 2", &"main_state", 2, &"Animation 5"]
+node_connections = [&"output", 0, &"main_state", &"location", 0, &"ground_state", &"location", 1, &"jump_direction", &"location", 2, &"Animation 3", &"landed", 0, &"Animation 7", &"landed", 1, &"Animation 10", &"ground_state", 0, &"landed", &"ground_state", 1, &"walk_speed", &"main_state", 0, &"location", &"main_state", 1, &"Animation 2", &"main_state", 2, &"Animation 5", &"walk_speed", 0, &"Animation 6"]
 
 [node name="PlayerSprite" type="Node2D"]
 script = ExtResource( "1_ulr48" )
@@ -1296,6 +1296,7 @@ script = ExtResource( "1_ulr48" )
 [node name="Root" type="Node2D" parent="."]
 
 [node name="ThighBack" type="Polygon2D" parent="Root"]
+light_mask = 0
 position = Vector2(27.357, 5)
 offset = Vector2(-270.259, -368.018)
 texture = ExtResource( "1_pijgd" )
@@ -1303,6 +1304,7 @@ polygon = PackedVector2Array(245.08, 417.62, 252.657, 387.106, 250.343, 355.378,
 uv = PackedVector2Array(245.08, 417.62, 252.657, 387.106, 250.343, 355.378, 263.189, 350.787, 281.89, 349.606, 288.787, 368.65, 289.703, 393.593, 281.236, 419.68, 272.54, 427.002, 254.005, 426.545)
 
 [node name="ShinBack" type="Polygon2D" parent="Root/ThighBack"]
+light_mask = 0
 position = Vector2(-4.43118, 46.0659)
 offset = Vector2(-272.341, -440.479)
 texture = ExtResource( "1_pijgd" )
@@ -1310,6 +1312,7 @@ polygon = PackedVector2Array(249.657, 438.215, 269.882, 432.087, 292.677, 438.90
 uv = PackedVector2Array(249.657, 438.215, 269.882, 432.087, 292.677, 438.902, 292.22, 465.446, 303.204, 481.007, 302.288, 491.762, 263.091, 495.276, 253.089, 487.414, 251.378, 467.717)
 
 [node name="ThighFront" type="Polygon2D" parent="Root"]
+light_mask = 0
 position = Vector2(-0.846, 5)
 offset = Vector2(-270.259, -368.018)
 texture = ExtResource( "1_pijgd" )
@@ -1317,6 +1320,7 @@ polygon = PackedVector2Array(245.08, 417.62, 252.657, 387.106, 250.343, 355.378,
 uv = PackedVector2Array(245.08, 417.62, 252.657, 387.106, 250.343, 355.378, 263.189, 350.787, 281.89, 349.606, 288.787, 368.65, 289.703, 393.593, 281.236, 419.68, 272.54, 427.002, 254.005, 426.545)
 
 [node name="ShinFront" type="Polygon2D" parent="Root/ThighFront"]
+light_mask = 0
 position = Vector2(-4.43118, 46.0659)
 offset = Vector2(-272.341, -440.479)
 texture = ExtResource( "1_pijgd" )
@@ -1324,6 +1328,7 @@ polygon = PackedVector2Array(249.657, 438.215, 269.882, 432.087, 292.677, 438.90
 uv = PackedVector2Array(249.657, 438.215, 269.882, 432.087, 292.677, 438.902, 292.22, 465.446, 303.204, 481.007, 302.288, 491.762, 263.091, 495.276, 253.089, 487.414, 251.378, 467.717)
 
 [node name="Torso" type="Polygon2D" parent="Root"]
+light_mask = 0
 position = Vector2(1.34912, -11.4674)
 rotation = 0.0020561
 offset = Vector2(-120, -410)
@@ -1333,6 +1338,7 @@ uv = PackedVector2Array(67.7346, 424.714, 86.9565, 335.469, 72.3112, 326.773, 69
 
 [node name="HandRight" type="Polygon2D" parent="Root/Torso"]
 show_behind_parent = true
+light_mask = 0
 position = Vector2(37.841, -109.891)
 offset = Vector2(-245.659, -324.514)
 texture = ExtResource( "1_pijgd" )
@@ -1340,6 +1346,7 @@ polygon = PackedVector2Array(228.604, 303.661, 283.295, 308.696, 308.924, 296.56
 uv = PackedVector2Array(228.604, 303.661, 283.295, 308.696, 308.924, 296.568, 316.705, 310.526, 331.808, 307.78, 332.037, 342.563, 321.968, 350.343, 240.961, 344.851, 218.078, 325.4)
 
 [node name="HandLeft" type="Polygon2D" parent="Root/Torso"]
+light_mask = 0
 position = Vector2(-25.3919, -119.197)
 scale = Vector2(1, -1)
 offset = Vector2(-312.49, -258.666)
@@ -1348,6 +1355,7 @@ polygon = PackedVector2Array(324.027, 276.888, 284.897, 285.126, 224.256, 287.41
 uv = PackedVector2Array(324.027, 276.888, 284.897, 285.126, 224.256, 287.414, 215.561, 264.531, 219.908, 244.165, 236.613, 246.224, 239.13, 235.698, 253.547, 235.698, 267.506, 247.597, 319.68, 240.046, 329.748, 259.497)
 
 [node name="Head" type="Polygon2D" parent="Root/Torso"]
+light_mask = 0
 position = Vector2(17, -155)
 offset = Vector2(-124.11, -229.206)
 texture = ExtResource( "1_pijgd" )
